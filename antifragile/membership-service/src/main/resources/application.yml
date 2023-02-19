@@ -1,0 +1,70 @@
+server:
+  port: 8010
+
+spring:
+  application:
+    name: membership-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/instagram?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          configuration:
+            key:
+              serializer: org.apache.kafka.common.serialization.StringSerializer
+      bindings:
+        momentsUserChanged:
+          destination: moments.user.changed
+          contentType: application/json
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: leekyumin0901@gmail.com
+    password: xpvgxhbwaphngvxy
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+
+  eureka:
+    client:
+      service-url:
+        default-zone: http://localhost:8761/eureka
+
+  security:
+    basic:
+      enable: false
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 822621894119-pern4lgrchfaauq34e6mijk2ieral762.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - profile
+              - email
+
+  jwt:
+    secret: happilyeverafterhappilyeverafter
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  service:
+    username: d245ef53-5ad5-4216-9c56-89fe0f8302a0
+    password: ef919ae4-b893-4969-b782-57978180ad33
